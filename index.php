@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Sysinfo</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+/* 
+ * Zeige und speichere die Daten des Aufrufenden
+ * @author Mainboarder.de
+ * @date 01.04.2014
+ */
+// Nimm dir was du brauchst
+spl_autoload_register(function ($class){
+	include 'libs/' . $class . '.class.php';
+});
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
-<div class="text-center" style="margin-top:11%;"><?php
-    $ip = $_SERVER['REMOTE_ADDR'];  
-    $host = gethostbyaddr($ip);
+// Eine Runde Instanziieren
+$smarty = new Smarty();
 
-    echo "<h2><strong>$ip</strong></h2><p style='font-family:sans-serif;'>
-";  
-    echo $_SERVER['HTTP_USER_AGENT'] . "<br />
-";
-    echo "$host <br />
-";
-?><p><br /></p>
-<a href="/" class="btn btn-primary">Reload</a>
-</div>
-    </body>
-</html>
+$userAgent = filter_input(INPUT_SERVER, 'HTTP_USER_AGENT',
+		FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$ip = filter_input(INPUT_SERVER, 'REMOTE_ADDR', FILTER_SANITIZE_STRING);
+$host = gethostbyaddr($ip);
+
+$smarty->assign('ip', $ip);
+$smarty->assign('useragent', $userAgent);
+$smarty->assign('host', $host);
+
+// Auf auf ins Verderben!
+$smarty->display('templates/index.tpl');
