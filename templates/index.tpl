@@ -14,11 +14,22 @@
     </head>
     <body>
 <div class="text-center" style="margin-top:11%;">
+	<div class="alert-success">
+		{if $cache eq 'cached'}
+		Dies ist das Profil eines anderen Benutzers
+		{elseif $cache eq 'unknown'}
+		Dieser Browser ist nicht bekannt. Vielleicht wurde das Profil gelöscht.
+		{else}
+		Link zu diesem Profil: <pre>http://ip.mainboarder.de/?browser={$link}</pre>
+	{/if}
+	</div>
 	<h2><strong>{$ip}</strong></h2>
 	<p style='font-family:sans-serif;'>{$useragent}<br />
 		{$host}<br /></p>
 	<p><br /></p>
 <a href="/" class="btn btn-primary">Reload</a>
 </div>
+	<footer class="text-center"><small><a href="https://github.com/mainboarder/IP">Github</a>
+		| <a href="http://mainboarder.de/impressum" rel="nofollow">Impressum</a></small></footer>
     </body>
 </html>
