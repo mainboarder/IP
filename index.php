@@ -36,7 +36,7 @@ if(!isset($_GET['browser'])){
 	
 // Fremde Daten
 }else{
-	$browser = R::findOne('browser', 'browserid = ?',
+	$browser = R::findLast('browser', 'browserid = ?',
 			array(filter_input(INPUT_GET, 'browser', FILTER_SANITIZE_STRING)));
 	
 	// Kamen Daten zurück?
