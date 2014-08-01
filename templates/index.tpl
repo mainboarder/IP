@@ -30,6 +30,6 @@
 <a href="/" class="btn btn-primary">Reload</a>
 </div>
 	<footer class="text-center"><small><a href="https://github.com/mainboarder/IP">Github</a>
-		| <a href="http://mainboarder.de/impressum" rel="nofollow">Impressum</a></small></footer>
+		| <a href="#" rel="nofollow">Impressum</a></small></footer>
     </body>
 </html>
